@@ -1341,7 +1341,7 @@ func TestNodePortServices(t *testing.T) {
 			[]v1.PodPhase{},
 		},
 		{
-			"annotated NodePort services with ignoreExternalIPs return an endpoint with IP addresses of the cluster's nodes' InternalIP",
+			"annotated NodePort services with nodePortTarget='internal' return the node(s) InternalIP instead of ExternalIP addresses",
 			"",
 			"",
 			"testing",
@@ -1353,8 +1353,8 @@ func TestNodePortServices(t *testing.T) {
 			false,
 			map[string]string{},
 			map[string]string{
-				hostnameAnnotationKey: "foo.example.org.",
-				ignoreExternalIPsAnnotationKey: "true",
+				hostnameAnnotationKey:       "foo.example.org.",
+				nodePortTargetAnnotationKey: "internal",
 			},
 			nil,
 			[]*endpoint.Endpoint{
